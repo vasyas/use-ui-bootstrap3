@@ -4,10 +4,9 @@ import AsyncSelect from "react-select/async"
 import "react-bootstrap-typeahead/css/Typeahead.css"
 import {Topic} from "push-rpc"
 import {components} from "react-select"
-import {highlight} from "../utils"
-import {Constraint} from "../validate"
-import {Field} from "../useForm"
+import {highlight} from "./utils"
 import {FormGroup, FormGroupProps} from "./FormGroup"
+import {Constraint, Field} from "@use-ui/hooks"
 
 interface Option {
   value: string

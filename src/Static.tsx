@@ -1,6 +1,6 @@
 import * as React from "react"
 import {FormGroup, FormGroupProps} from "./FormGroup"
-import {getChildrenText} from "../utils"
+import {getChildrenText} from "./utils"
 
 interface Props extends FormGroupProps {
   children: any

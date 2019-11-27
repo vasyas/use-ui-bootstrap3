@@ -146,6 +146,11 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@use-ui/hooks@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@use-ui/hooks/-/hooks-1.0.2.tgz#50cfa61e9b4e45abd5b754cae255ebdf5fbd6204"
+  integrity sha512-HEdlXBcSEPm1ZbmzmeVIwzesacNSA9y02EftVsD+u2318cvrgSvkt6AZlwamJMWVAfVFtl9k3iNzRDO4Ehgu8A==
+
 ansi-colors@3.2.3:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/ansi-colors/-/ansi-colors-3.2.3.tgz#57d35b8686e851e2cc04c403f1c00203976a1813"

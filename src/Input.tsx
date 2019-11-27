@@ -1,8 +1,7 @@
 import * as React from "react"
 import {useRef} from "react"
-import {Constraint} from "../validate"
+import {Constraint, Field} from "@use-ui/hooks"
 import {FormGroup, FormGroupProps} from "./FormGroup"
-import {Field} from "../useForm"
 
 interface Props extends Partial<Constraint>, FormGroupProps {
   field: Field

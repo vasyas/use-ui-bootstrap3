@@ -1,14 +1,21 @@
 {
-  "name": "react-use-ui",
+  "name": "@use-ui/bootstrap3",
   "version": "1.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "pub": "yarn publish --access public",
     "prepublishOnly": "tsc",
     "build": "tsc",
     "test": "mocha -r ts-node/register tests/**/*.ts"
   },
   "license": "MIT",
+  "dependencies": {
+    "@use-ui/hooks": "^1.0.2",
+    "classnames": "^2.2.6",
+    "push-rpc": "^1.0.4",
+    "react-select": "^3.0.8"
+  },
   "devDependencies": {
     "@types/chai": "^4.2.5",
     "@types/mocha": "^5.2.7",
@@ -20,9 +27,6 @@
     "typescript": "^3.7.2"
   },
   "peerDependencies": {
-    "classnames": "^2.2.6",
-    "push-rpc": "^1.0.4",
-    "react": "^16.12.0",
-    "react-select": "^3.0.8"
+    "react": "^16.12.0"
   }
 }
