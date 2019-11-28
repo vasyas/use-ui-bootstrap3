@@ -146,10 +146,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@use-ui/hooks@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@use-ui/hooks/-/hooks-1.0.2.tgz#50cfa61e9b4e45abd5b754cae255ebdf5fbd6204"
-  integrity sha512-HEdlXBcSEPm1ZbmzmeVIwzesacNSA9y02EftVsD+u2318cvrgSvkt6AZlwamJMWVAfVFtl9k3iNzRDO4Ehgu8A==
+"@use-ui/hooks@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@use-ui/hooks/-/hooks-1.0.3.tgz#41a06cc945d77b5faa90b49e93fe87559fbdc6a6"
+  integrity sha512-KxkBAsl+hYhaSmRxkeUbT2cLlJHDHqK48AFfi9C2ai3U3wp9Iu6YDiYNhPIadX5MzKjkU0ESmebvy16AN+9e1A==
 
 ansi-colors@3.2.3:
   version "3.2.3"

@@ -1,6 +1,6 @@
 {
   "name": "@use-ui/bootstrap3",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@use-ui/hooks": "^1.0.2",
+    "@use-ui/hooks": "^1.0.3",
     "classnames": "^2.2.6",
     "push-rpc": "^1.0.4",
     "react-select": "^3.0.8"
@@ -27,5 +27,8 @@
   },
   "peerDependencies": {
     "react": "^16.12.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

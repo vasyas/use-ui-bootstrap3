@@ -1,7 +1,6 @@
 import * as React from "react"
 import {useEffect, useRef, useState} from "react"
 import AsyncSelect from "react-select/async"
-import "react-bootstrap-typeahead/css/Typeahead.css"
 import {Topic} from "push-rpc"
 import {components} from "react-select"
 import {highlight} from "./utils"

@@ -1,6 +1,6 @@
 import * as React from "react"
 import cx from "classnames"
-import {useResult} from ".."
+import {useResult} from "@use-ui/hooks"
 
 export const ActionResult = ({error = undefined}) => {
   const {result} = useResult()

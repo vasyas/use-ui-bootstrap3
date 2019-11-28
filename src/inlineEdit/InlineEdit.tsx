@@ -1,6 +1,6 @@
 import * as React from "react"
 import {CSSProperties, useEffect, useRef, useState} from "react"
-import {Field, FieldElement} from "../../useForm"
+import {Field, FieldElement} from "@use-ui/hooks"
 import {FormGroupProps} from "../FormGroup"
 
 interface Props extends FormGroupProps {
