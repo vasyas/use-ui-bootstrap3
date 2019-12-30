@@ -21,6 +21,10 @@ interface Props<D, P> extends Partial<Constraint>, FormGroupProps {
 
   options?: Option[] | object
   right?: any
+
+  placeholder?: any
+  clear?: boolean
+  indicatorSeparator?: boolean
 }
 
 export function Select<D, P>({
@@ -33,6 +37,10 @@ export function Select<D, P>({
 
   options,
   right,
+
+  placeholder,
+  clear,
+  indicatorSeparator,
 
   ...other
 }: Props<D, P>) {
@@ -95,7 +103,14 @@ export function Select<D, P>({
         className="select"
         key={JSON.stringify(params) + "-" + JSON.stringify(options)}
         ref={ref}
-        styles={styles}
+        styles={{
+          ...styles,
+          indicatorSeparator: !indicatorSeparator
+            ? () => ({
+                display: "none",
+              })
+            : undefined,
+        }}
         menuPortalTarget={document.getElementById("popupTarget")}
         menuShouldBlockScroll={true}
         classNamePrefix="select"
@@ -111,6 +126,8 @@ export function Select<D, P>({
         onBlur={field.onBlur}
         onFocus={field.onFocus}
         onChange={onChange}
+        placeholder={placeholder}
+        isClearable={clear != null || !other.required}
       />
       {right}
     </FormGroup>
@@ -123,9 +140,6 @@ const styles = {
     display: "flex",
     flex: 1,
     overflow: "hidden",
-  }),
-  indicatorSeparator: () => ({
-    display: "none",
   }),
   input: () => ({}),
 }

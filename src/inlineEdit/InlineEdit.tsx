@@ -88,7 +88,7 @@ export const InlineEdit = (p: Props) => {
     if (editing) {
       return (
         <>
-          <a href="#" onClick={e => e.preventDefault()} tabIndex={-1}>
+          <a className="save" href="#" onClick={e => e.preventDefault()} tabIndex={-1}>
             <i className="fa fa-check save" />
           </a>
 
@@ -96,7 +96,7 @@ export const InlineEdit = (p: Props) => {
             <>
               <div className="delim" />
 
-              <a href="#" onMouseDown={cancel} tabIndex={-1}>
+              <a className="cancel" href="#" onMouseDown={cancel} tabIndex={-1}>
                 <i className="fa fa-times cancel" />
               </a>
             </>
@@ -106,7 +106,7 @@ export const InlineEdit = (p: Props) => {
     }
 
     return (
-      <a href="#" onClick={startEditing} tabIndex={-1}>
+      <a className="start-edit" href="#" onClick={startEditing} tabIndex={-1}>
         <i className="fa fa-pencil" />
       </a>
     )
@@ -121,8 +121,6 @@ export const InlineEdit = (p: Props) => {
     onBlur: onBlur,
     onFocus: startEditing,
     getError: () => error,
-
-    onChange: () => {},
   }
 
   return (
