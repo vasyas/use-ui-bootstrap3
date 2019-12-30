@@ -1,6 +1,6 @@
 {
   "name": "@use-ui/bootstrap3",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -13,6 +13,7 @@
     "@use-ui/hooks": "^1.0.4",
     "classnames": "^2.2.6",
     "push-rpc": "^1.0.4",
+    "react": "^16.12.0",
     "react-select": "^3.0.8"
   },
   "devDependencies": {
