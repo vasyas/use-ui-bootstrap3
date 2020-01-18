@@ -124,7 +124,7 @@ export const InlineEdit = (p: Props) => {
   }
 
   return (
-    <div className="inline-edit" style={props.style}>
+    <div className="inline-edit" style={props.style} onKeyDown={onKeyDown}>
       <FieldComponent
         field={field}
         label={props.label}
