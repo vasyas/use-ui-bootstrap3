@@ -25,6 +25,14 @@
   .cancel {
     color: #000;
   }
+
+  &.disabled {
+    pointer-events: none;
+
+    i {
+      color: #999 !important;
+    }
+  }
 }
 
 .inline-edit {

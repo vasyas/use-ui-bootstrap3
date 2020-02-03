@@ -2,6 +2,7 @@ import * as React from "react"
 import {CSSProperties, useEffect, useRef, useState} from "react"
 import {Field, FieldElement} from "@use-ui/hooks"
 import {FormGroupProps} from "../FormGroup"
+import cx from "classnames"
 
 interface Props extends FormGroupProps {
   value: string
@@ -10,12 +11,14 @@ interface Props extends FormGroupProps {
   label?: any
   cancel?: boolean
   style?: CSSProperties
+  disabled?: boolean
 }
 
 interface FieldComponentProps {
   field: Field
   right?: any
   label?: any
+  disabled?: boolean
 }
 
 export const InlineEdit = (p: Props) => {
@@ -96,7 +99,12 @@ export const InlineEdit = (p: Props) => {
             <>
               <div className="delim" />
 
-              <a className="cancel" href="#" onMouseDown={cancel} tabIndex={-1}>
+              <a
+                className="cancel"
+                href="#"
+                onMouseDown={props.disabled ? null : cancel}
+                tabIndex={-1}
+              >
                 <i className="fa fa-times cancel" />
               </a>
             </>
@@ -106,7 +114,12 @@ export const InlineEdit = (p: Props) => {
     }
 
     return (
-      <a className="start-edit" href="#" onClick={startEditing} tabIndex={-1}>
+      <a
+        className="start-edit"
+        href="#"
+        onClick={props.disabled ? null : startEditing}
+        tabIndex={-1}
+      >
         <i className="fa fa-pencil" />
       </a>
     )
@@ -129,8 +142,15 @@ export const InlineEdit = (p: Props) => {
         field={field}
         label={props.label}
         right={
-          saving ? <Spinner /> : <div className="inline-edit-controls">{renderControls()}</div>
+          saving ? (
+            <Spinner />
+          ) : (
+            <div className={cx("inline-edit-controls", {disabled: props.disabled})}>
+              {renderControls()}
+            </div>
+          )
         }
+        disabled={saving || props.disabled}
       />
     </div>
   )
