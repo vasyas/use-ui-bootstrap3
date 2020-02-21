@@ -1,17 +1,19 @@
 import * as React from "react"
 import {CSSProperties, useEffect, useRef, useState} from "react"
-import {Field, FieldElement} from "@use-ui/hooks"
+import {Field, FieldElement, FieldTypeName, getFieldType} from "@use-ui/hooks"
 import {FormGroupProps} from "../FormGroup"
 import cx from "classnames"
+import {FieldType} from "@use-ui/hooks/dist/fieldTypes"
 
-interface Props extends FormGroupProps {
-  value: string
-  save(value): Promise<void>
+interface Props<V> extends FormGroupProps {
+  value: V
+  save(value: V): Promise<void>
   component: (props: FieldComponentProps) => React.ReactElement
   label?: any
   cancel?: boolean
   style?: CSSProperties
   disabled?: boolean
+  type?: FieldTypeName
 }
 
 interface FieldComponentProps {
@@ -21,8 +23,9 @@ interface FieldComponentProps {
   disabled?: boolean
 }
 
-export const InlineEdit = (p: Props) => {
-  const props: Props = {
+// TODO move non-presentation to @use-ui/hooks
+export function InlineEdit<V>(p: Props<V>) {
+  const props: Props<V> = {
     style: {},
     ...p,
   }
@@ -35,6 +38,8 @@ export const InlineEdit = (p: Props) => {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState(null)
 
+  const type: FieldType<V> = getFieldType(p.type || "string")
+
   function startEditing(e?) {
     e && e.preventDefault()
     setEditing(true)
@@ -45,7 +50,7 @@ export const InlineEdit = (p: Props) => {
     setSaving(true)
 
     try {
-      await props.save(edited)
+      await props.save(type.valueToData(edited))
       stopEditing()
     } catch (e) {
       setError(e.message)
@@ -56,7 +61,7 @@ export const InlineEdit = (p: Props) => {
 
   function cancel(e?) {
     e && e.preventDefault()
-    setEdited(props.value)
+    setEdited(type.dataToValue(props.value))
     stopEditing()
   }
 
@@ -76,7 +81,7 @@ export const InlineEdit = (p: Props) => {
   }
 
   useEffect(() => {
-    setEdited(props.value)
+    setEdited(type.dataToValue(props.value))
   }, [props.value])
 
   useEffect(() => {

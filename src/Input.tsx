@@ -1,20 +1,22 @@
 import * as React from "react"
 import {useRef} from "react"
-import {Constraint, Field} from "@use-ui/hooks"
+import {Constraint, Field, FieldTypeName} from "@use-ui/hooks"
 import {FormGroup, FormGroupProps} from "./FormGroup"
 
 interface Props extends Partial<Constraint>, FormGroupProps {
   field: Field
+  type?: FieldTypeName
   autoFocus?: boolean
   disabled?: boolean
   right?: any
 }
 
-export const Input = ({field, label, autoFocus, disabled, right, ...other}: Props) => {
+export const Input = ({field, type, label, autoFocus, disabled, right, ...other}: Props) => {
   const ref = useRef<HTMLInputElement>()
 
   field.setFieldElement({
     constraint: other,
+    type,
     focus: () => ref.current.focus(),
     blur: () => ref.current.blur(),
   })
