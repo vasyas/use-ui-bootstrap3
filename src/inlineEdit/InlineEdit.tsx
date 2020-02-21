@@ -1,9 +1,10 @@
 import * as React from "react"
 import {CSSProperties, useEffect, useRef, useState} from "react"
-import {Field, FieldElement, FieldTypeName, getFieldType} from "@use-ui/hooks"
+import {Field, FieldElement, getFieldType} from "@use-ui/hooks"
 import {FormGroupProps} from "../FormGroup"
 import cx from "classnames"
 import {FieldType} from "@use-ui/hooks/dist/fieldTypes"
+import {enValidateMessages, message} from "@use-ui/hooks/dist/validate"
 
 interface Props<V> extends FormGroupProps {
   value: V
@@ -13,7 +14,6 @@ interface Props<V> extends FormGroupProps {
   cancel?: boolean
   style?: CSSProperties
   disabled?: boolean
-  type?: FieldTypeName
 }
 
 interface FieldComponentProps {
@@ -38,7 +38,8 @@ export function InlineEdit<V>(p: Props<V>) {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState(null)
 
-  const type: FieldType<V> = getFieldType(p.type || "string")
+  const type: FieldType<V> =
+    fieldElement.current && getFieldType(fieldElement.current.type || "string")
 
   function startEditing(e?) {
     e && e.preventDefault()
@@ -70,18 +71,26 @@ export function InlineEdit<V>(p: Props<V>) {
     setEditing(false)
   }
 
-  function onBlur() {
+  function tryToSave() {
     if (saving || !editing) return
-    save()
+    if (!updateValidationError()) {
+      save()
+    }
   }
 
   function onKeyDown(e) {
-    if (e.key == "Enter") return void save(e)
+    if (e.key == "Enter") {
+      e.preventDefault()
+      tryToSave()
+    }
     if (e.key == "Escape") return void cancel(e)
   }
 
   useEffect(() => {
-    setEdited(type.dataToValue(props.value))
+    if (fieldElement.current) {
+      const type = getFieldType(fieldElement.current.type || "string") // "render" type could be old here, recreate it
+      setEdited(type.dataToValue(props.value))
+    }
   }, [props.value])
 
   useEffect(() => {
@@ -130,13 +139,24 @@ export function InlineEdit<V>(p: Props<V>) {
     )
   }
 
+  function updateValidationError() {
+    const error = message(fieldElement.current.constraint, edited, enValidateMessages)
+    setError(error)
+    return !!error
+  }
+
   const FieldComponent = props.component
 
   const field: Field = {
-    setFieldElement: fe => (fieldElement.current = fe),
+    setFieldElement: fe => {
+      return (fieldElement.current = fe)
+    },
     getValue: () => edited,
-    setValue: s => setEdited(s),
-    onBlur: onBlur,
+    setValue: s => {
+      setEdited(s)
+      if (error) updateValidationError()
+    },
+    onBlur: tryToSave,
     onFocus: startEditing,
     getError: () => error,
   }
