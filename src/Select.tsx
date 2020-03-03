@@ -25,6 +25,7 @@ interface Props<D, P> extends Partial<Constraint>, FormGroupProps {
   placeholder?: any
   clear?: boolean
   indicatorSeparator?: boolean
+  multi?: boolean
 }
 
 export function Select<D, P>({
@@ -41,6 +42,7 @@ export function Select<D, P>({
   placeholder,
   clear,
   indicatorSeparator,
+  multi,
 
   ...other
 }: Props<D, P>) {
@@ -77,7 +79,9 @@ export function Select<D, P>({
   // set selected option
   useEffect(() => {
     const value = field.getValue()
-    const selected = cachedOptions.filter(o => o.value == value)
+    const selectedValues = value ? (multi ? value.split(",") : [value]) : []
+
+    const selected = cachedOptions.filter(o => selectedValues.indexOf(o.value) >= 0)
 
     setSelected(selected)
   }, [cachedOptions, field.getValue()])
@@ -88,10 +92,15 @@ export function Select<D, P>({
       val = ""
     }
 
-    field.setValue(val ? val.value : "")
+    if (!val) {
+      field.setValue("")
+    } else {
+      field.setValue(val.map(v => v.value).join(","))
+    }
   }
 
   field.setFieldElement({
+    type: multi ? "stringList" : "string",
     constraint: other,
     focus: () => ref.current && ref.current.focus(),
     blur: () => ref.current.blur && ref.current.blur(),
@@ -128,6 +137,7 @@ export function Select<D, P>({
         onChange={onChange}
         placeholder={placeholder}
         isClearable={clear != null || !other.required}
+        isMulti={multi}
       />
       {right}
     </FormGroup>
