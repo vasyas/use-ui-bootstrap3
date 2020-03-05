@@ -1,8 +1,12 @@
 import * as React from "react"
 
-export function highlight(s: string, term: string): React.ReactFragment {
+export function highlight(s: string, term: string, exact = false): React.ReactFragment {
   if (s && term) {
     s = "" + s
+
+    if (exact) {
+      return s == term ? <span className="hlt">s</span> : s
+    }
 
     const parts = s.split(new RegExp(term, "i"))
     if (parts.length == 1) return parts[0]
