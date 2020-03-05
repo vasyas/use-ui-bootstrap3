@@ -95,6 +95,10 @@ export function Select<D, P>({
     if (!val) {
       field.setValue("")
     } else {
+      if (!Array.isArray(val)) {
+        val = [val]
+      }
+
       field.setValue(val.map(v => v.value).join(","))
     }
   }
