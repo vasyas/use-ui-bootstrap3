@@ -1,11 +1,11 @@
 import * as React from "react"
 import {useEffect, useRef, useState} from "react"
 import AsyncSelect from "react-select/async"
-import {Topic} from "push-rpc"
 import {components} from "react-select"
 import {highlight} from "./utils"
 import {FormGroup, FormGroupProps} from "./FormGroup"
 import {Constraint, Field} from "@use-ui/hooks"
+import {RemoteTopic} from "push-rpc/dist/rpc"
 
 interface Option {
   value: string
@@ -15,7 +15,7 @@ interface Option {
 interface Props<D, P> extends Partial<Constraint>, FormGroupProps {
   field: Field
 
-  topic?: Topic<D[], P>
+  topic?: RemoteTopic<D[], P>
   params?: P
   map?: (D) => Option
 
@@ -58,14 +58,14 @@ export function Select<D, P>({
   const [selected, setSelected] = useState<Option[]>([])
   const [inputValue, setInputValue] = useState<string>("")
 
-  async function loadOptions(inputValue) {
+  async function loadOptions(search) {
     let options = optionsArray
 
     if (!options) {
       setLoading(true)
 
       try {
-        const items = await topic.get(params)
+        const items = await topic.get({...params, search})
         options = items.map(map)
       } finally {
         setLoading(false)
