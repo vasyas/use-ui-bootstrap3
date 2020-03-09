@@ -118,6 +118,13 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.4.tgz#622a72bebd1e3f48d921563b4b60a762295a81fc"
   integrity sha512-6PYY5DVdAY1ifaQW6XYTnOMihmBVT27elqSjEoodchsGjzYlEsTQMcEhSud99kVawatyTZRTiVkJ/c6lwbQ7nA==
 
+"@push-rpc/core@^1.0.26":
+  version "1.0.26"
+  resolved "https://registry.yarnpkg.com/@push-rpc/core/-/core-1.0.26.tgz#8347555913b4658ea91ed62ebaba5656e518cae7"
+  integrity sha512-hMnR3ERUpYKzk3nATa+o4oj1hopvJyu0a1PGYXIfFFazdryM6Jpf3Dz2t1FYkb5amq/JIwOdTfHmzaqbB9Ad+g==
+  dependencies:
+    uuid-js "^0.7.5"
+
 "@types/chai@^4.2.5":
   version "4.2.5"
   resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.2.5.tgz#f8da153ebbe30babb0adc9a528b9ad32be3175a2"
@@ -811,13 +818,6 @@ prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2:
     loose-envify "^1.4.0"
     object-assign "^4.1.1"
     react-is "^16.8.1"
-
-push-rpc@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/push-rpc/-/push-rpc-1.0.4.tgz#9107551cc3bac5a8b045d428486c36a4d333d752"
-  integrity sha512-F39EL/oEyNv4ndhnwJl8qfws0OZq94zyABLnvOEJYkt77FDe567xXoa3vIErmTzUpUS0+wWL/olQfPqNJqGkoQ==
-  dependencies:
-    uuid-js "^0.7.5"
 
 react-input-autosize@^2.2.2:
   version "2.2.2"

@@ -10,9 +10,9 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@push-rpc/core": "^1.0.26",
     "@use-ui/hooks": "^1.0.9",
     "classnames": "^2.2.6",
-    "push-rpc": "^1.0.4",
     "react-select": "^3.0.8"
   },
   "devDependencies": {

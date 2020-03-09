@@ -5,7 +5,7 @@ import {components} from "react-select"
 import {highlight} from "./utils"
 import {FormGroup, FormGroupProps} from "./FormGroup"
 import {Constraint, Field} from "@use-ui/hooks"
-import {RemoteTopic} from "push-rpc/dist/rpc"
+import {RemoteTopic} from "@push-rpc/core"
 
 interface Option {
   value: string
