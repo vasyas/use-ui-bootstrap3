@@ -70,6 +70,11 @@ export function Select<D, P>({
       } finally {
         setLoading(false)
       }
+    } else {
+      options = options.filter(
+        o =>
+          !search || o.label.toLowerCase().indexOf(search.toLowerCase()) >= 0 || o.value == search
+      )
     }
 
     setCachedOptions(options)
