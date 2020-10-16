@@ -1,13 +1,16 @@
 import * as React from "react"
+import {CSSProperties} from "react"
 
 export interface FormGroupProps {
   label?: any
   invalidFeedback?: any
+  style?: CSSProperties
 }
 
 export const FormGroup = ({
   label = null,
   invalidFeedback = null,
+  style = undefined,
   children,
 }: FormGroupProps & {children: any}) => {
   if (label == null) {
@@ -15,7 +18,7 @@ export const FormGroup = ({
   }
 
   return (
-    <div className="form-group">
+    <div className="form-group" style={style}>
       {label && <label className={classNames.label}>{label}</label>}
       <div className={classNames.field}>
         {children}
