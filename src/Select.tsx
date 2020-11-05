@@ -31,6 +31,7 @@ interface Props<D, P> extends Partial<Constraint>, FormGroupProps {
 export function Select<D, P>({
   label,
   field,
+  style,
 
   topic,
   params,
@@ -116,7 +117,7 @@ export function Select<D, P>({
   })
 
   return (
-    <FormGroup label={label} invalidFeedback={field.getError()}>
+    <FormGroup label={label} invalidFeedback={field.getError()} style={style}>
       <AsyncSelect
         className="select"
         key={JSON.stringify(params) + "-" + JSON.stringify(options)}
