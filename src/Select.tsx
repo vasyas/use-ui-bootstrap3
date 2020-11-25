@@ -26,6 +26,8 @@ interface Props<D, P> extends Partial<Constraint>, FormGroupProps {
   clear?: boolean
   indicatorSeparator?: boolean
   multi?: boolean
+
+  className?: string
 }
 
 export function Select<D, P>({
@@ -44,6 +46,8 @@ export function Select<D, P>({
   clear,
   indicatorSeparator,
   multi,
+
+  className,
 
   ...other
 }: Props<D, P>) {
@@ -119,7 +123,7 @@ export function Select<D, P>({
   return (
     <FormGroup label={label} invalidFeedback={field.getError()} style={style}>
       <AsyncSelect
-        className="select"
+        className={`select ${className || ""}`.trim()}
         key={JSON.stringify(params) + "-" + JSON.stringify(options)}
         ref={ref}
         styles={{
