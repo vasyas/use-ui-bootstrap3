@@ -10,6 +10,7 @@ interface Props extends Partial<Constraint>, FormGroupProps {
   disabled?: boolean
   right?: any
   placeholder?: string
+  inputType?: string
 }
 
 export const Input = ({
@@ -20,6 +21,7 @@ export const Input = ({
   disabled,
   right,
   placeholder,
+  inputType = "text",
   ...other
 }: Props) => {
   const ref = useRef<HTMLInputElement>()
@@ -34,7 +36,7 @@ export const Input = ({
   return (
     <FormGroup label={label} invalidFeedback={field.getError()}>
       <input
-        type="text"
+        type={inputType}
         className="form-control"
         value={field.getValue()}
         onChange={e => field.setValue(e.target.value)}
