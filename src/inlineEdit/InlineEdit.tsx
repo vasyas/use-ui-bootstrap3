@@ -14,6 +14,7 @@ interface Props<V> extends FormGroupProps {
   cancel?: boolean
   style?: CSSProperties
   disabled?: boolean
+  loading?: boolean
 }
 
 interface FieldComponentProps {
@@ -37,6 +38,8 @@ export function InlineEdit<V>(p: Props<V>) {
   const [editing, setEditing] = useState(false)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState(null)
+
+  const progress = saving || props.loading
 
   const type: FieldType<V> =
     fieldElement.current && getFieldType(fieldElement.current.type || "string")
@@ -72,7 +75,7 @@ export function InlineEdit<V>(p: Props<V>) {
   }
 
   function tryToSave() {
-    if (saving || !editing) return
+    if (progress || !editing) return
     if (!updateValidationError()) {
       save()
     }
@@ -167,7 +170,7 @@ export function InlineEdit<V>(p: Props<V>) {
         field={field}
         label={props.label}
         right={
-          saving ? (
+          progress ? (
             <Spinner />
           ) : (
             <div className={cx("inline-edit-controls", {disabled: props.disabled})}>
@@ -175,7 +178,7 @@ export function InlineEdit<V>(p: Props<V>) {
             </div>
           )
         }
-        disabled={saving || props.disabled}
+        disabled={progress || props.disabled}
       />
     </div>
   )

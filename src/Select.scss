@@ -51,4 +51,10 @@
     height: 100%;
     padding-left: 3px;
   }
+
+  &.select--is-disabled {
+    .select__indicators {
+      visibility: hidden;
+    }
+  }
 }
