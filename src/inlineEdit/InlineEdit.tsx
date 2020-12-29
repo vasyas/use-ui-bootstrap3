@@ -37,6 +37,7 @@ export function InlineEdit<V>(p: Props<V>) {
 
   const [editing, setEditing] = useState(false)
   const [saving, setSaving] = useState(false)
+  const [saved, setSaved] = useState(false)
   const [error, setError] = useState(null)
 
   const progress = saving || props.loading
@@ -56,6 +57,7 @@ export function InlineEdit<V>(p: Props<V>) {
     try {
       await props.save(type.valueToData(edited))
       stopEditing()
+      setSaved(true)
     } catch (e) {
       setError(e.message)
     } finally {
@@ -130,7 +132,11 @@ export function InlineEdit<V>(p: Props<V>) {
       )
     }
 
-    return (
+    return saved ? (
+      <a className="saved" href="#" onClick={props.disabled ? null : startEditing} tabIndex={-1}>
+        <i className="fa fa-thumbs-o-up" />
+      </a>
+    ) : (
       <a
         className="start-edit"
         href="#"
