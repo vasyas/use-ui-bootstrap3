@@ -110,9 +110,15 @@ export function InlineEdit<V>(p: Props<V>) {
     if (editing) {
       return (
         <>
-          <a className="save" href="#" onClick={e => e.preventDefault()} tabIndex={-1}>
-            <i className="fa fa-check save" />
-          </a>
+          {error ? (
+            <a className="error-saving" href="#" onClick={e => e.preventDefault()} tabIndex={-1}>
+              <i className="fa fa-warning" />
+            </a>
+          ) : (
+            <a className="save" href="#" onClick={e => e.preventDefault()} tabIndex={-1}>
+              <i className="fa fa-check" />
+            </a>
+          )}
 
           {props.cancel && (
             <>
