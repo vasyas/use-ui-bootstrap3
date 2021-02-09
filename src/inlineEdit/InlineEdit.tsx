@@ -15,6 +15,7 @@ interface Props<V> extends FormGroupProps {
   style?: CSSProperties
   disabled?: boolean
   loading?: boolean
+  saveOnChange?: boolean // onBlur otherwise
 }
 
 interface FieldComponentProps {
@@ -171,10 +172,14 @@ export function InlineEdit<V>(p: Props<V>) {
       setEdited(s)
       if (error) updateValidationError()
     },
-    onBlur: tryToSave,
+    onBlur: p.saveOnChange ? undefined : tryToSave,
     onFocus: startEditing,
     getError: () => error,
   }
+
+  useEffect(() => {
+    if (editing && p.saveOnChange) tryToSave()
+  }, [edited])
 
   return (
     <div className="inline-edit" style={props.style} onKeyDown={onKeyDown}>
