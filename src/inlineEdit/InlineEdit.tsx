@@ -6,17 +6,21 @@ import cx from "classnames"
 import {FieldType} from "@use-ui/hooks/dist/fieldTypes"
 import {enValidateMessages, message} from "@use-ui/hooks/dist/validate"
 
-interface Props<V> extends FormGroupProps {
-  value: V
-  save(value: V): Promise<void>
-  component: (props: FieldComponentProps) => React.ReactElement
-  label?: any
-  cancel?: boolean
-  style?: CSSProperties
-  disabled?: boolean
-  loading?: boolean
-  saveOnChange?: boolean // onBlur otherwise
-}
+type Props<V> = FormGroupProps &
+  RenderProp & {
+    value: V
+    save(value: V): Promise<void>
+    label?: any
+    cancel?: boolean
+    style?: CSSProperties
+    disabled?: boolean
+    loading?: boolean
+    saveOnChange?: boolean // onBlur otherwise
+  }
+
+type RenderProp =
+  | {component: React.FC<FieldComponentProps>}
+  | {render: (props: FieldComponentProps) => React.ReactNode}
 
 interface FieldComponentProps {
   field: Field
@@ -161,8 +165,6 @@ export function InlineEdit<V>(p: Props<V>) {
     return !!error
   }
 
-  const FieldComponent = props.component
-
   const field: Field = {
     setFieldElement: fe => {
       return (fieldElement.current = fe)
@@ -181,22 +183,24 @@ export function InlineEdit<V>(p: Props<V>) {
     if (editing && p.saveOnChange) tryToSave()
   }, [edited])
 
+  const fieldProps: FieldComponentProps = {
+    field,
+    label: props.label,
+    right: progress ? (
+      <Spinner />
+    ) : (
+      <div className={cx("inline-edit-controls", {disabled: props.disabled})}>
+        {renderControls()}
+      </div>
+    ),
+    disabled: progress || props.disabled,
+  }
+
   return (
     <div className="inline-edit" style={props.style} onKeyDown={onKeyDown}>
-      <FieldComponent
-        field={field}
-        label={props.label}
-        right={
-          progress ? (
-            <Spinner />
-          ) : (
-            <div className={cx("inline-edit-controls", {disabled: props.disabled})}>
-              {renderControls()}
-            </div>
-          )
-        }
-        disabled={progress || props.disabled}
-      />
+      {"component" in props
+        ? React.createElement(props.component, fieldProps)
+        : props.render(fieldProps)}
     </div>
   )
 }
