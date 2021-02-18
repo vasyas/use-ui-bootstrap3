@@ -12,6 +12,7 @@ interface Props extends Partial<Constraint>, FormGroupProps {
   placeholder?: string
   rows?: number
   cols?: number
+  htmlId?: string
 }
 
 export const TextArea = ({
@@ -24,6 +25,7 @@ export const TextArea = ({
   placeholder,
   rows,
   cols,
+  htmlId,
   ...other
 }: Props) => {
   const ref = useRef<HTMLTextAreaElement>()
@@ -49,6 +51,7 @@ export const TextArea = ({
         placeholder={placeholder}
         rows={rows}
         cols={cols}
+        id={htmlId}
       />
       {right}
     </FormGroup>

@@ -11,6 +11,7 @@ interface Props extends Partial<Constraint>, FormGroupProps {
   right?: any
   placeholder?: string
   inputType?: string
+  htmlId?: string
 }
 
 export const Input = ({
@@ -22,6 +23,7 @@ export const Input = ({
   right,
   placeholder,
   inputType = "text",
+  htmlId,
   ...other
 }: Props) => {
   const ref = useRef<HTMLInputElement>()
@@ -46,6 +48,7 @@ export const Input = ({
         autoFocus={autoFocus}
         disabled={disabled}
         placeholder={placeholder}
+        id={htmlId}
       />
       {right}
     </FormGroup>
