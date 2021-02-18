@@ -29,7 +29,7 @@ interface Props<D, P> extends Partial<Constraint>, FormGroupProps {
   disabled?: boolean
 
   className?: string
-  htmlId?: string
+  id?: string
 }
 
 export function Select<D, P>({
@@ -51,7 +51,7 @@ export function Select<D, P>({
 
   className,
   disabled,
-  htmlId,
+  id,
 
   ...other
 }: Props<D, P>) {
@@ -157,7 +157,7 @@ export function Select<D, P>({
         isClearable={clear != null || !other.required}
         isMulti={multi}
         isDisabled={disabled}
-        id={htmlId}
+        id={id}
       />
       {right}
     </FormGroup>

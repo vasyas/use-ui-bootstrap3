@@ -4,15 +4,16 @@ import {getChildrenText} from "./utils"
 
 interface Props extends FormGroupProps {
   children: any
-  htmlId?: string
+  id?: string
+  className?: string
 }
 
-export const Static = ({htmlId, label, invalidFeedback, children}: Props) => (
+export const Static = ({id, className, label, invalidFeedback, children}: Props) => (
   <FormGroup label={label} invalidFeedback={invalidFeedback}>
     <input
-      id={htmlId}
+      id={id}
       type="text"
-      className="form-control"
+      className={className || "form-control"}
       value={getChildrenText(children)}
       disabled
     />

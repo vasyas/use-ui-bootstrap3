@@ -12,7 +12,8 @@ interface Props extends Partial<Constraint>, FormGroupProps {
   placeholder?: string
   rows?: number
   cols?: number
-  htmlId?: string
+  id?: string
+  className?: string
 }
 
 export const TextArea = ({
@@ -25,7 +26,8 @@ export const TextArea = ({
   placeholder,
   rows,
   cols,
-  htmlId,
+  id,
+  className,
   ...other
 }: Props) => {
   const ref = useRef<HTMLTextAreaElement>()
@@ -40,7 +42,7 @@ export const TextArea = ({
   return (
     <FormGroup label={label} invalidFeedback={field.getError()}>
       <textarea
-        className="form-control"
+        className={className || "form-control"}
         value={field.getValue()}
         onChange={e => field.setValue(e.target.value)}
         onBlur={field.onBlur}
@@ -51,7 +53,7 @@ export const TextArea = ({
         placeholder={placeholder}
         rows={rows}
         cols={cols}
-        id={htmlId}
+        id={id}
       />
       {right}
     </FormGroup>

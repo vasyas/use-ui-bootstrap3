@@ -8,10 +8,20 @@ interface Props extends Partial<Constraint>, FormGroupProps {
   autoFocus?: boolean
   disabled?: boolean
   right?: any
-  htmlId?: string
+  id?: string
+  className?: string
 }
 
-export const CheckBox = ({htmlId, field, label, autoFocus, disabled, right, ...other}: Props) => {
+export const CheckBox = ({
+  id,
+  className,
+  field,
+  label,
+  autoFocus,
+  disabled,
+  right,
+  ...other
+}: Props) => {
   const ref = useRef<HTMLInputElement>()
 
   field.setFieldElement({
@@ -25,7 +35,7 @@ export const CheckBox = ({htmlId, field, label, autoFocus, disabled, right, ...o
     <FormGroup label={label} invalidFeedback={field.getError()}>
       <input
         type="checkbox"
-        className="form-control"
+        className={className || "form-control"}
         onChange={e => field.setValue("" + e.target.checked)}
         onBlur={field.onBlur}
         onFocus={field.onFocus}
@@ -33,7 +43,7 @@ export const CheckBox = ({htmlId, field, label, autoFocus, disabled, right, ...o
         autoFocus={autoFocus}
         disabled={disabled}
         checked={field.getValue() == "true"}
-        id={htmlId}
+        id={id}
       />
       {right}
     </FormGroup>
