@@ -19,7 +19,7 @@ interface Props<D, P> extends Partial<Constraint>, FormGroupProps {
   params?: P
   map?: (D) => Option
 
-  options?: Option[] | object
+  options?: Option[] | Record<string, string>
   right?: any
 
   placeholder?: any
@@ -187,8 +187,6 @@ const HighlightingOption = props => {
 function getOptionsArray(options, map): Option[] {
   if (!options) return options
 
-  // const {allOption, allOptionLabel} = props
-
   if (!Array.isArray(options)) {
     options = Object.keys(options || {}).map(value => ({
       value,
@@ -206,18 +204,6 @@ function getOptionsArray(options, map): Option[] {
   )
 
   options = options.map(map)
-
-  /*
-  if (allOption) {
-    options = [
-      {
-        value: "",
-        label: allOptionLabel,
-      },
-      ...options,
-    ]
-  }
-   */
 
   return options
 }
