@@ -12,49 +12,52 @@ interface Option {
   label: string
 }
 
-interface Props<D, P> extends Partial<Constraint>, FormGroupProps {
+interface Props<TopicData, TopicParams> extends Partial<Constraint>, FormGroupProps {
   field: Field
 
-  topic?: RemoteTopic<D[], P>
-  params?: P
-  map?: (D) => Option
+  topic?: RemoteTopic<TopicData[], TopicParams>
+  params?: TopicParams
+  map?: (d: TopicData) => Option
 
   options?: Option[] | Record<string, string>
-  right?: any
 
+  onSelect?(oo: Option[]): void
+
+  right?: any
   placeholder?: any
   clear?: boolean
   indicatorSeparator?: boolean
   multi?: boolean
   disabled?: boolean
-
   className?: string
   id?: string
 }
 
-export function Select<D, P>({
-  label,
+export function Select<TopicData, TopicParams>({
   field,
-  style,
 
   topic,
   params,
   map = i => i as any,
 
   options,
-  right,
 
+  onSelect = () => {},
+
+  style,
+  right,
   placeholder,
   clear,
   indicatorSeparator,
   multi,
-
-  className,
   disabled,
+  className,
   id,
 
+  label,
+
   ...other
-}: Props<D, P>) {
+}: Props<TopicData, TopicParams>) {
   if (!options && !topic) {
     throw new Error("Either options or topic is required for Select")
   }
@@ -98,6 +101,7 @@ export function Select<D, P>({
     const selected = cachedOptions.filter(o => selectedValues.indexOf(o.value) >= 0)
 
     setSelected(selected)
+    onSelect(selected)
   }, [cachedOptions, field.getValue()])
 
   function onChange(val) {
