@@ -12,16 +12,16 @@ interface Option {
   label: string
 }
 
-interface Props<TopicData, TopicParams> extends Partial<Constraint>, FormGroupProps {
+interface Props<TopicData, TopicParams, MappedOption extends Option = Option> extends Partial<Constraint>, FormGroupProps {
   field: Field
 
   topic?: RemoteTopic<TopicData[], TopicParams>
   params?: TopicParams
-  map?: (d: TopicData) => Option
+  map?: (d: TopicData) => MappedOption
 
-  options?: Option[] | Record<string, string>
+  options?: MappedOption[] | Record<string, string>
 
-  onSelect?(oo: Option[]): void
+  onSelect?(oo: MappedOption[]): void
 
   right?: any
   placeholder?: any
@@ -33,7 +33,7 @@ interface Props<TopicData, TopicParams> extends Partial<Constraint>, FormGroupPr
   id?: string
 }
 
-export function Select<TopicData, TopicParams>({
+export function Select<TopicData, TopicParams, MappedOption extends Option = Option>({
   field,
 
   topic,
@@ -57,17 +57,17 @@ export function Select<TopicData, TopicParams>({
   label,
 
   ...other
-}: Props<TopicData, TopicParams>) {
+}: Props<TopicData, TopicParams, MappedOption>) {
   if (!options && !topic) {
     throw new Error("Either options or topic is required for Select")
   }
 
-  const optionsArray = getOptionsArray(options, map)
+  const optionsArray = getOptionsArray<MappedOption>(options, map)
 
   const ref = useRef<HTMLInputElement>()
   const [loading, setLoading] = useState<boolean>(false)
-  const [cachedOptions, setCachedOptions] = useState<Option[]>([])
-  const [selected, setSelected] = useState<Option[]>([])
+  const [cachedOptions, setCachedOptions] = useState<MappedOption[]>([])
+  const [selected, setSelected] = useState<MappedOption[]>([])
   const [inputValue, setInputValue] = useState<string>("")
 
   async function loadOptions(search) {
@@ -188,7 +188,7 @@ const HighlightingOption = props => {
   )
 }
 
-function getOptionsArray(options, map): Option[] {
+function getOptionsArray<MappedOption extends Option>(options, map): MappedOption[] {
   if (!options) return options
 
   if (!Array.isArray(options)) {
