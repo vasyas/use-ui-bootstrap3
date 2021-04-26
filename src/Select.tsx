@@ -7,9 +7,14 @@ import {FormGroup, FormGroupProps} from "./FormGroup"
 import {Constraint, Field} from "@use-ui/hooks"
 import {RemoteTopic} from "@push-rpc/core"
 
-interface Option {
+export type Option = {
   value: string
   label: string
+}
+
+export type OptionRequest = {
+  search: string
+  values: string[]
 }
 
 interface Props<TopicData, TopicParams, MappedOption extends Option = Option> extends Partial<Constraint>, FormGroupProps {
@@ -36,7 +41,7 @@ interface Props<TopicData, TopicParams, MappedOption extends Option = Option> ex
 export function Select<TopicData, TopicParams, MappedOption extends Option = Option>({
   field,
 
-  topic,
+                                                                                       topic,
   params,
   map = i => i as any,
 
@@ -70,14 +75,29 @@ export function Select<TopicData, TopicParams, MappedOption extends Option = Opt
   const [selected, setSelected] = useState<MappedOption[]>([])
   const [inputValue, setInputValue] = useState<string>("")
 
-  async function loadOptions(search) {
+  const [defaultOptions, setDefaultOptions] = useState()
+
+  const initialValue = useRef(field.getValue()).current
+  const initialSelectedValues = initialValue ? (multi ? initialValue.split(",") : [initialValue]) : []
+
+  useEffect(() => {
+    (async () => {
+      if (initialSelectedValues.length && !!topic) {
+        setDefaultOptions(await loadOptions(null, initialSelectedValues))
+      } else {
+        setDefaultOptions(true)
+      }
+    })()
+  }, [])
+
+  async function loadOptions(search, values) {
     let options = optionsArray
 
     if (!options) {
       setLoading(true)
 
       try {
-        const items = await topic.get({...params, search})
+        const items = await topic.get({...params, search, values})
         options = items.map(map)
       } finally {
         setLoading(false)
@@ -132,7 +152,7 @@ export function Select<TopicData, TopicParams, MappedOption extends Option = Opt
     <FormGroup label={label} invalidFeedback={field.getError()} style={style}>
       <AsyncSelect
         className={`select ${className || ""}`.trim()}
-        key={JSON.stringify(params) + "-" + JSON.stringify(options)}
+        key={JSON.stringify(params) + "-" + JSON.stringify(options) + "-" + JSON.stringify(defaultOptions)}
         ref={ref}
         styles={{
           ...styles,
@@ -146,7 +166,7 @@ export function Select<TopicData, TopicParams, MappedOption extends Option = Opt
         menuShouldBlockScroll={true}
         classNamePrefix="select"
         menuPlacement="auto"
-        defaultOptions
+        defaultOptions={defaultOptions}
         components={{
           Option: props => <HighlightingOption {...props} inputValue={inputValue} />,
         }}
