@@ -71,24 +71,24 @@ export function Select<TopicData, TopicParams, MappedOption extends Option = Opt
 
   const ref = useRef<HTMLInputElement>()
   const [loading, setLoading] = useState<boolean>(false)
-  const [cachedOptions, setCachedOptions] = useState<MappedOption[]>([])
+  const [cachedOptions, setCachedOptions] = useState<MappedOption[]>([]) // cached options used to lookup option object from passed value
   const [selected, setSelected] = useState<MappedOption[]>([])
   const [inputValue, setInputValue] = useState<string>("")
 
   const [defaultOptions, setDefaultOptions] = useState()
 
-  const initialValue = useRef(field.getValue()).current
-  const initialSelectedValues = initialValue ? (multi ? initialValue.split(",") : [initialValue]) : []
+  const selectedValues = field.getValue() ? (multi ? field.getValue().split(",") : [field.getValue()]) : []
 
+  // if params changed - 1) update defaultOptions 2) update cached options
   useEffect(() => {
     (async () => {
-      if (initialSelectedValues.length && !!topic) {
-        setDefaultOptions(await loadOptions(null, initialSelectedValues))
+      if (selectedValues.length && !!topic) {
+        setDefaultOptions(await loadOptions(null, selectedValues))
       } else {
         setDefaultOptions(true)
       }
     })()
-  }, [])
+  }, [JSON.stringify(params)])
 
   async function loadOptions(search, values) {
     let options = optionsArray
@@ -148,11 +148,12 @@ export function Select<TopicData, TopicParams, MappedOption extends Option = Opt
     blur: () => ref.current.blur && ref.current.blur(),
   })
 
+  // key contains defaultOptions b/c we would like to update need to update defaultOptions on topic params change
   return (
     <FormGroup label={label} invalidFeedback={field.getError()} style={style}>
       <AsyncSelect
         className={`select ${className || ""}`.trim()}
-        key={JSON.stringify(params) + "-" + JSON.stringify(options) + "-" + JSON.stringify(defaultOptions)}
+        key={JSON.stringify(options) + "-" + JSON.stringify(defaultOptions)}
         ref={ref}
         styles={{
           ...styles,
