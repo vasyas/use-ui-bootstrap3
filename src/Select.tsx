@@ -124,6 +124,19 @@ export function Select<TopicData, TopicParams, MappedOption extends Option = Opt
     onSelect(selected)
   }, [cachedOptions, field.getValue()])
 
+  const initialRender = useRef(true)
+
+  // reset value on topic param change
+  useEffect(() => {
+    // if it's not the first change - set value to empty
+    if (!initialRender.current) {
+      field.setValue("")
+    } else {
+      initialRender.current = false
+    }
+
+  }, [JSON.stringify(params)])
+
   function onChange(val) {
     if (Array.isArray(val) && !val.length) {
       // https://github.com/JedWatson/react-select/issues/2682
