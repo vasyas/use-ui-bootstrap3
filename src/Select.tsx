@@ -79,17 +79,6 @@ export function Select<TopicData, TopicParams, MappedOption extends Option = Opt
 
   const selectedValues = field.getValue() ? (multi ? field.getValue().split(",") : [field.getValue()]) : []
 
-  // if params changed - 1) update defaultOptions 2) update cached options
-  useEffect(() => {
-    (async () => {
-      if (selectedValues.length && !!topic) {
-        setDefaultOptions(await loadOptions(null, selectedValues))
-      } else {
-        setDefaultOptions(true)
-      }
-    })()
-  }, [JSON.stringify(params)])
-
   async function loadOptions(search, values) {
     let options = optionsArray
 
@@ -126,15 +115,18 @@ export function Select<TopicData, TopicParams, MappedOption extends Option = Opt
 
   const initialRender = useRef(true)
 
-  // reset value on topic param change
+  // on topic param change:
+  // 1. reset value
+  // 2. re-load options, update defaultOptions & cached
   useEffect(() => {
-    // if it's not the first change - set value to empty
     if (!initialRender.current) {
       field.setValue("")
+      loadOptions(null, selectedValues).then(setDefaultOptions)
     } else {
+      setDefaultOptions(true)
+
       initialRender.current = false
     }
-
   }, [JSON.stringify(params)])
 
   function onChange(val) {
@@ -161,7 +153,7 @@ export function Select<TopicData, TopicParams, MappedOption extends Option = Opt
     blur: () => ref.current.blur && ref.current.blur(),
   })
 
-  // key contains defaultOptions b/c we would like to update need to update defaultOptions on topic params change
+  // key contains defaultOptions b/c we would like to update defaultOptions on topic params change
   return (
     <FormGroup label={label} invalidFeedback={field.getError()} style={style}>
       <AsyncSelect
