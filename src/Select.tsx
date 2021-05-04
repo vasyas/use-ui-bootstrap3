@@ -17,7 +17,9 @@ export type OptionRequest = {
   values: string[]
 }
 
-interface Props<TopicData, TopicParams, MappedOption extends Option = Option> extends Partial<Constraint>, FormGroupProps {
+interface Props<TopicData, TopicParams, MappedOption extends Option = Option>
+  extends Partial<Constraint>,
+    FormGroupProps {
   field: Field
 
   topic?: RemoteTopic<TopicData[], TopicParams>
@@ -41,9 +43,9 @@ interface Props<TopicData, TopicParams, MappedOption extends Option = Option> ex
 export function Select<TopicData, TopicParams, MappedOption extends Option = Option>({
   field,
 
-                                                                                       topic,
+  topic,
   params,
-  map = i => i as any,
+  map = (i) => i as any,
 
   options,
 
@@ -75,9 +77,13 @@ export function Select<TopicData, TopicParams, MappedOption extends Option = Opt
   const [selected, setSelected] = useState<MappedOption[]>([])
   const [inputValue, setInputValue] = useState<string>("")
 
-  const [defaultOptions, setDefaultOptions] = useState()
+  const [defaultOptions, setDefaultOptions] = useState<boolean | MappedOption[]>()
 
-  const selectedValues = field.getValue() ? (multi ? field.getValue().split(",") : [field.getValue()]) : []
+  const selectedValues = field.getValue()
+    ? multi
+      ? field.getValue().split(",")
+      : [field.getValue()]
+    : []
 
   async function loadOptions(search, values) {
     let options = optionsArray
@@ -93,7 +99,7 @@ export function Select<TopicData, TopicParams, MappedOption extends Option = Opt
       }
     } else {
       options = options.filter(
-        o =>
+        (o) =>
           !search || o.label.toLowerCase().indexOf(search.toLowerCase()) >= 0 || o.value == search
       )
     }
@@ -107,7 +113,7 @@ export function Select<TopicData, TopicParams, MappedOption extends Option = Opt
     const value = field.getValue()
     const selectedValues = value ? (multi ? value.split(",") : [value]) : []
 
-    const selected = cachedOptions.filter(o => selectedValues.indexOf(o.value) >= 0)
+    const selected = cachedOptions.filter((o) => selectedValues.indexOf(o.value) >= 0)
 
     setSelected(selected)
     onSelect(selected)
@@ -142,7 +148,7 @@ export function Select<TopicData, TopicParams, MappedOption extends Option = Opt
         val = [val]
       }
 
-      field.setValue(val.map(v => v.value).join(","))
+      field.setValue(val.map((v) => v.value).join(","))
     }
   }
 
@@ -174,12 +180,12 @@ export function Select<TopicData, TopicParams, MappedOption extends Option = Opt
         menuPlacement="auto"
         defaultOptions={defaultOptions}
         components={{
-          Option: props => <HighlightingOption {...props} inputValue={inputValue} />,
+          Option: (props) => <HighlightingOption {...props} inputValue={inputValue} />,
         }}
         isLoading={loading}
         value={selected}
         loadOptions={loadOptions}
-        onInputChange={val => setInputValue(val)}
+        onInputChange={(val) => setInputValue(val)}
         onBlur={field.onBlur}
         onFocus={field.onFocus}
         onChange={onChange}
@@ -204,7 +210,7 @@ const styles = {
   input: () => ({}),
 }
 
-const HighlightingOption = props => {
+const HighlightingOption = (props) => {
   const {label, inputValue, value, ...other} = props
 
   return (
@@ -218,13 +224,13 @@ function getOptionsArray<MappedOption extends Option>(options, map): MappedOptio
   if (!options) return options
 
   if (!Array.isArray(options)) {
-    options = Object.keys(options || {}).map(value => ({
+    options = Object.keys(options || {}).map((value) => ({
       value,
       label: options[value],
     }))
   }
 
-  options = (options as any[]).map(o =>
+  options = (options as any[]).map((o) =>
     typeof o == "string"
       ? {
           value: o,

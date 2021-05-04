@@ -1,4 +1,4 @@
-## HOWTO
+Collection of React components to build forms using [@use-ui/hooks](https://github.com/vasyas/use-ui-hooks).
 
 ## Typical cases
 
