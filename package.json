@@ -6,7 +6,8 @@
   "scripts": {
     "prepublishOnly": "tsc",
     "build": "tsc",
-    "test": "mocha -r ts-node/register tests/**/*.ts"
+    "test": "mocha -r ts-node/register tests/**/*.ts",
+    "doc": "typedoc --out api-docs --readme none ./src/index.ts"
   },
   "license": "MIT",
   "repository": "https://github.com/vasyas/use-ui-bootstrap3.git",
