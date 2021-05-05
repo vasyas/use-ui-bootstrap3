@@ -36,7 +36,7 @@ export const CheckBox = ({
       <input
         type="checkbox"
         className={className || "form-control"}
-        onChange={e => field.setValue("" + e.target.checked)}
+        onChange={(e) => field.setValue("" + e.target.checked)}
         onBlur={field.onBlur}
         onFocus={field.onFocus}
         ref={ref}

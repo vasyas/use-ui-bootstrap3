@@ -2,19 +2,29 @@ import * as React from "react"
 import {CSSProperties} from "react"
 
 export interface FormGroupProps {
+  /** @param  Label for the form group */
   label?: any
+  /** Feedback (usually, validation error) */
   invalidFeedback?: any
+  /** Additional style that should be passed to the top div */
   style?: CSSProperties
 }
 
-export const FormGroup = ({
+/**
+ * An input row, optionally containing a label and having error feedback text.
+ *
+ * Input is specified in children.
+ *
+ * @category Component
+ */
+export const FormGroup: React.FunctionComponent<FormGroupProps> = ({
   label = null,
   invalidFeedback = null,
   style = undefined,
   children,
-}: FormGroupProps & {children: any}) => {
+}) => {
   if (label == null) {
-    return children
+    return <>{children}</>
   }
 
   return (

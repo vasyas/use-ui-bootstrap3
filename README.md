@@ -2,7 +2,7 @@ Collection of React components to build forms using [@use-ui/hooks](https://gith
 
 ## Typical cases
 
-### Default value for <Select/> when loading data from server
+### Default value for Select when loading data from server
 
 # FAQ
 
@@ -10,3 +10,7 @@ Collection of React components to build forms using [@use-ui/hooks](https://gith
 
 OnChange origins in imperative world with inputs and event listeners.
 Instead of using onChange on field elements, use useEffect on form data or values.
+
+# API Reference
+
+[/api-docs/README.md](/api-docs/README.md)
