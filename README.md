@@ -12,6 +12,15 @@ Consist of form inputs and several additional components.
 Each of the form input components uses [FormGroup](api-docs/docs.md#formgroup) for its rendering, and 
 accepts `FormGroup` props.
 
+Input components accept validation constraint as propertes:
+```
+<Input
+  field={fields.name}
+  required
+  minLength={10}
+/>
+```
+
 ### Additional components
 
 - [InlineEdit](api-docs/docs.md#inlineedit) - Supports inline-editing of values. Can use one of the form inputs for entry.

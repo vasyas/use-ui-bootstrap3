@@ -25,6 +25,18 @@ prop | type | default | required | description
 &nbsp;
 ## Input
 
+Render html input in a FormGroup.
+
+Example:
+```
+const form = useForm({ email: null })
+<Input
+  label="Email"
+  field={form.email}
+  required
+/>
+```
+
 prop | type | default | required | description
 ---- | :----: | :-------: | :--------: | -----------
 **autoFocus** | `Unknown` |  | :x: | 
