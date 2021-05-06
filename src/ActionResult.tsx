@@ -5,7 +5,8 @@ import {useResult} from "@use-ui/hooks"
 /**
  * Display block with success result or error message.
  *
- * To use this component, you need to wrap your component tree in a ```ResultContext``` from @use-ui/hooks.
+ * To use this component, you need to wrap your component tree in a
+ * [ResultContext from @use-ui/hooks](https://github.com/vasyas/use-ui-hooks/blob/master/api-docs/README.md#resultcontext).
  */
 export function ActionResult({error = undefined}: Props) {
   const {result} = useResult()

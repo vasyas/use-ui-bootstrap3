@@ -11,184 +11,167 @@ Component API
 - [\<FormGroup/\>](docs.md#formgroup)
 - [\<InlineEdit/\>](docs.md#inlineedit)
 
-### ActionResult
+## ActionResult
 
 Display block with success result or error message.
 
-To use this component, you need to wrap your component tree in a \`\`\`ResultContext\`\`\` from @use-ui/hooks.
+To use this component, you need to wrap your component tree in a
+[ResultContext from @use-ui/hooks](https://github.com/vasyas/use-ui-hooks/blob/master/api-docs/README.md#resultcontext).
 
-#### Props
+prop | type | default | required | description
+---- | :----: | :-------: | :--------: | -----------
+**error** | `string` | `undefined` | :x: | Error message to show, otherwise result from result context would be used
 
-| Name  | Type   | Default value | Description                                                               |
-| ----- | ------ | ------------- | ------------------------------------------------------------------------- |
-| error | string | undefined     | Error message to show, otherwise result from result context would be used |
 &nbsp;
 &nbsp;
-### Input
+## Input
 
 Render html input in a FormGroup.
 
 Example:
-\`\`\`
+```
 const form = useForm({ email: null })
-&lt;Input
+<Input
   label="Email"
   field={form.email}
   required
 />
-\`\`\`
+```
 
-#### Props
+prop | type | default | required | description
+---- | :----: | :-------: | :--------: | -----------
+**autoFocus** | `boolean` |  | :x: | 
+**className** | `string` |  | :x: | 
+**disabled** | `boolean` |  | :x: | 
+**field** | `Field` |  | :white_check_mark: | 
+**id** | `string` |  | :x: | 
+**inputType** | `string` | `text` | :x: | 
+**integer** | `boolean` |  | :x: | 
+**invalidFeedback** | `*` |  | :x: | Feedback (usually, validation error)
+**label** | `*` |  | :x: | @param Label for the form group
+**nonNegative** | `boolean` |  | :x: | 
+**number** | `boolean` |  | :x: | 
+**placeholder** | `string` |  | :x: | 
+**required** | `boolean` |  | :x: | 
+**right** | `*` |  | :x: | 
+**style** | `CSSProperties` |  | :x: | Additional style that should be passed to the top div
+**type** | `string | number` |  | :x: | 
 
-| Name               | Type             | Default value | Description                                           |
-| ------------------ | ---------------- | ------------- | ----------------------------------------------------- |
-| field _(required)_ | Field            |               |                                                       |
-| type               | string \| number |               |                                                       |
-| autoFocus          | boolean          |               |                                                       |
-| disabled           | boolean          |               |                                                       |
-| right              | any              |               |                                                       |
-| placeholder        | string           |               |                                                       |
-| inputType          | string           | text          |                                                       |
-| id                 | string           |               |                                                       |
-| className          | string           |               |                                                       |
-| required           | boolean          |               |                                                       |
-| integer            | boolean          |               |                                                       |
-| number             | boolean          |               |                                                       |
-| nonNegative        | boolean          |               |                                                       |
-| label              | any              |               | @param Label for the form group                       |
-| invalidFeedback    | any              |               | Feedback (usually, validation error)                  |
-| style              | CSSProperties    |               | Additional style that should be passed to the top div |
 &nbsp;
 &nbsp;
-### Select
+## Select
 
+prop | type | default | required | description
+---- | :----: | :-------: | :--------: | -----------
+**className** | `string` |  | :x: | 
+**clear** | `boolean` |  | :x: | 
+**disabled** | `boolean` |  | :x: | 
+**field** | `Field` |  | :white_check_mark: | 
+**id** | `string` |  | :x: | 
+**indicatorSeparator** | `boolean` |  | :x: | 
+**integer** | `boolean` |  | :x: | 
+**invalidFeedback** | `*` |  | :x: | Feedback (usually, validation error)
+**label** | `*` |  | :x: | @param Label for the form group
+**map** | `(d: TopicData) => MappedOption` | `(i) => i as any` | :x: | 
+**multi** | `boolean` |  | :x: | 
+**nonNegative** | `boolean` |  | :x: | 
+**number** | `boolean` |  | :x: | 
+**onSelect** | `(oo: MappedOption[]) => void` | `() => {}` | :x: | 
+**options** | `Record<string, string> | MappedOption[]` |  | :x: | 
+**params** | `TopicParams` |  | :x: | 
+**placeholder** | `*` |  | :x: | 
+**required** | `boolean` |  | :x: | 
+**right** | `*` |  | :x: | 
+**style** | `CSSProperties` |  | :x: | Additional style that should be passed to the top div
+**topic** | `RemoteTopic<TopicData[], TopicParams>` |  | :x: | 
 
-
-#### Props
-
-| Name               | Type                                         | Default value   | Description                                           |
-| ------------------ | -------------------------------------------- | --------------- | ----------------------------------------------------- |
-| field _(required)_ | Field                                        |                 |                                                       |
-| topic              | RemoteTopic&lt;TopicData\[], TopicParams>    |                 |                                                       |
-| params             | TopicParams                                  |                 |                                                       |
-| map                | (d: TopicData) => MappedOption               | (i) => i as any |                                                       |
-| options            | Record&lt;string, string> \| MappedOption\[] |                 |                                                       |
-| onSelect           | (oo: MappedOption\[]) => void                | () => {}        |                                                       |
-| right              | any                                          |                 |                                                       |
-| placeholder        | any                                          |                 |                                                       |
-| clear              | boolean                                      |                 |                                                       |
-| indicatorSeparator | boolean                                      |                 |                                                       |
-| multi              | boolean                                      |                 |                                                       |
-| disabled           | boolean                                      |                 |                                                       |
-| className          | string                                       |                 |                                                       |
-| id                 | string                                       |                 |                                                       |
-| required           | boolean                                      |                 |                                                       |
-| integer            | boolean                                      |                 |                                                       |
-| number             | boolean                                      |                 |                                                       |
-| nonNegative        | boolean                                      |                 |                                                       |
-| label              | any                                          |                 | @param Label for the form group                       |
-| invalidFeedback    | any                                          |                 | Feedback (usually, validation error)                  |
-| style              | CSSProperties                                |                 | Additional style that should be passed to the top div |
 &nbsp;
 &nbsp;
-### Static
+## Static
 
+prop | type | default | required | description
+---- | :----: | :-------: | :--------: | -----------
+**className** | `string` |  | :x: | 
+**id** | `string` |  | :x: | 
+**invalidFeedback** | `*` |  | :x: | Feedback (usually, validation error)
+**label** | `*` |  | :x: | @param Label for the form group
+**style** | `CSSProperties` |  | :x: | Additional style that should be passed to the top div
 
-
-#### Props
-
-| Name            | Type          | Default value | Description                                           |
-| --------------- | ------------- | ------------- | ----------------------------------------------------- |
-| id              | string        |               |                                                       |
-| className       | string        |               |                                                       |
-| label           | any           |               | @param Label for the form group                       |
-| invalidFeedback | any           |               | Feedback (usually, validation error)                  |
-| style           | CSSProperties |               | Additional style that should be passed to the top div |
 &nbsp;
 &nbsp;
-### CheckBox
+## CheckBox
 
+prop | type | default | required | description
+---- | :----: | :-------: | :--------: | -----------
+**autoFocus** | `boolean` |  | :x: | 
+**className** | `string` |  | :x: | 
+**disabled** | `boolean` |  | :x: | 
+**field** | `Field` |  | :white_check_mark: | 
+**id** | `string` |  | :x: | 
+**integer** | `boolean` |  | :x: | 
+**invalidFeedback** | `*` |  | :x: | Feedback (usually, validation error)
+**label** | `*` |  | :x: | @param Label for the form group
+**nonNegative** | `boolean` |  | :x: | 
+**number** | `boolean` |  | :x: | 
+**required** | `boolean` |  | :x: | 
+**right** | `*` |  | :x: | 
+**style** | `CSSProperties` |  | :x: | Additional style that should be passed to the top div
 
-
-#### Props
-
-| Name               | Type          | Default value | Description                                           |
-| ------------------ | ------------- | ------------- | ----------------------------------------------------- |
-| field _(required)_ | Field         |               |                                                       |
-| autoFocus          | boolean       |               |                                                       |
-| disabled           | boolean       |               |                                                       |
-| right              | any           |               |                                                       |
-| id                 | string        |               |                                                       |
-| className          | string        |               |                                                       |
-| required           | boolean       |               |                                                       |
-| integer            | boolean       |               |                                                       |
-| number             | boolean       |               |                                                       |
-| nonNegative        | boolean       |               |                                                       |
-| label              | any           |               | @param Label for the form group                       |
-| invalidFeedback    | any           |               | Feedback (usually, validation error)                  |
-| style              | CSSProperties |               | Additional style that should be passed to the top div |
 &nbsp;
 &nbsp;
-### TextArea
+## TextArea
 
+prop | type | default | required | description
+---- | :----: | :-------: | :--------: | -----------
+**autoFocus** | `boolean` |  | :x: | 
+**className** | `string` |  | :x: | 
+**cols** | `Number` |  | :x: | 
+**disabled** | `boolean` |  | :x: | 
+**field** | `Field` |  | :white_check_mark: | 
+**id** | `string` |  | :x: | 
+**integer** | `boolean` |  | :x: | 
+**invalidFeedback** | `*` |  | :x: | Feedback (usually, validation error)
+**label** | `*` |  | :x: | @param Label for the form group
+**nonNegative** | `boolean` |  | :x: | 
+**number** | `boolean` |  | :x: | 
+**placeholder** | `string` |  | :x: | 
+**required** | `boolean` |  | :x: | 
+**right** | `*` |  | :x: | 
+**rows** | `Number` |  | :x: | 
+**style** | `CSSProperties` |  | :x: | Additional style that should be passed to the top div
+**type** | `string | number` |  | :x: | 
 
-
-#### Props
-
-| Name               | Type             | Default value | Description                                           |
-| ------------------ | ---------------- | ------------- | ----------------------------------------------------- |
-| field _(required)_ | Field            |               |                                                       |
-| type               | string \| number |               |                                                       |
-| autoFocus          | boolean          |               |                                                       |
-| disabled           | boolean          |               |                                                       |
-| right              | any              |               |                                                       |
-| placeholder        | string           |               |                                                       |
-| rows               | number           |               |                                                       |
-| cols               | number           |               |                                                       |
-| id                 | string           |               |                                                       |
-| className          | string           |               |                                                       |
-| required           | boolean          |               |                                                       |
-| integer            | boolean          |               |                                                       |
-| number             | boolean          |               |                                                       |
-| nonNegative        | boolean          |               |                                                       |
-| label              | any              |               | @param Label for the form group                       |
-| invalidFeedback    | any              |               | Feedback (usually, validation error)                  |
-| style              | CSSProperties    |               | Additional style that should be passed to the top div |
 &nbsp;
 &nbsp;
-### FormGroup
+## FormGroup
 
 An input row, optionally containing a label and having error feedback text.
 
 Input is specified in children.
 
-#### Props
+prop | type | default | required | description
+---- | :----: | :-------: | :--------: | -----------
+**invalidFeedback** | `*` | `null` | :x: | Feedback (usually, validation error)
+**label** | `*` | `null` | :x: | @param Label for the form group
+**style** | `CSSProperties` | `undefined` | :x: | Additional style that should be passed to the top div
 
-| Name            | Type          | Default value | Description                                           |
-| --------------- | ------------- | ------------- | ----------------------------------------------------- |
-| label           | any           | null          | @param Label for the form group                       |
-| invalidFeedback | any           | null          | Feedback (usually, validation error)                  |
-| style           | CSSProperties | undefined     | Additional style that should be passed to the top div |
 &nbsp;
 &nbsp;
-### InlineEdit
+## InlineEdit
 
+prop | type | default | required | description
+---- | :----: | :-------: | :--------: | -----------
+**cancel** | `boolean` |  | :x: | 
+**component** | `FC<FieldComponentProps>` |  | :white_check_mark: | 
+**disabled** | `boolean` |  | :x: | 
+**invalidFeedback** | `*` |  | :x: | Feedback (usually, validation error)
+**label** | `*` |  | :x: | @param Label for the form group
+**loading** | `boolean` |  | :x: | 
+**render** | `(props: FieldComponentProps) => ReactNode` |  | :white_check_mark: | 
+**save** | `(value: V) => Promise<void>` |  | :white_check_mark: | 
+**saveOnChange** | `boolean` |  | :x: | 
+**style** | `CSSProperties` |  | :x: | Additional style that should be passed to the top div
+**value** | `V` |  | :white_check_mark: | 
 
-
-#### Props
-
-| Name                   | Type                                      | Default value | Description                                           |
-| ---------------------- | ----------------------------------------- | ------------- | ----------------------------------------------------- |
-| label                  | any                                       |               | @param Label for the form group                       |
-| invalidFeedback        | any                                       |               | Feedback (usually, validation error)                  |
-| style                  | CSSProperties                             |               | Additional style that should be passed to the top div |
-| component _(required)_ | FC&lt;FieldComponentProps>                |               |                                                       |
-| value _(required)_     | V                                         |               |                                                       |
-| save _(required)_      | (value: V) => Promise&lt;void>            |               |                                                       |
-| cancel                 | boolean                                   |               |                                                       |
-| disabled               | boolean                                   |               |                                                       |
-| loading                | boolean                                   |               |                                                       |
-| saveOnChange           | boolean                                   |               |                                                       |
-| render _(required)_    | (props: FieldComponentProps) => ReactNode |               |                                                       |
 &nbsp;
 &nbsp;
