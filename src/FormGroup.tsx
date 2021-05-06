@@ -14,8 +14,6 @@ export interface FormGroupProps {
  * An input row, optionally containing a label and having error feedback text.
  *
  * Input is specified in children.
- *
- * @category Component
  */
 export const FormGroup: React.FunctionComponent<FormGroupProps> = ({
   label = null,

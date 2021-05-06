@@ -6,10 +6,8 @@ import {useResult} from "@use-ui/hooks"
  * Display block with success result or error message.
  *
  * To use this component, you need to wrap your component tree in a ```ResultContext``` from @use-ui/hooks.
- *
- * @category Component
  */
-export const ActionResult: React.FC<Props> = ({error = undefined}) => {
+export function ActionResult({error = undefined}: Props) {
   const {result} = useResult()
 
   if (!error && !result) return null
@@ -21,7 +19,6 @@ export const ActionResult: React.FC<Props> = ({error = undefined}) => {
   )
 }
 
-/** @notExported */
 interface Props {
   /** Error message to show, otherwise result from result context would be used */
   error: string
