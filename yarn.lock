@@ -1204,6 +1204,11 @@ typedoc-plugin-markdown@^3.7.2:
   dependencies:
     handlebars "^4.7.7"
 
+typedoc-plugin-not-exported@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/typedoc-plugin-not-exported/-/typedoc-plugin-not-exported-0.1.6.tgz#501187970f2fca2f608b7a37d79e68bee9947f50"
+  integrity sha512-nVtDW2zofM+ns0DcQkLMaZ2c6zJTiqHHNVYcDdFaFDuMSSxF9PYmRByO19EYKi+P2olw1cv7rOT4OLbgD4OglQ==
+
 typedoc@^0.20.36:
   version "0.20.36"
   resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.20.36.tgz#ee5523c32f566ad8283fc732aa8ea322d1a45f6a"

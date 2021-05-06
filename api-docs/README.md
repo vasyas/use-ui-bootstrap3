@@ -10,11 +10,11 @@
 
 ### Component Variables
 
+- [ActionResult](README.md#actionresult)
 - [FormGroup](README.md#formgroup)
 
 ### Functions
 
-- [ActionResult](README.md#actionresult)
 - [CheckBox](README.md#checkbox)
 - [InlineEdit](README.md#inlineedit)
 - [Input](README.md#input)
@@ -26,6 +26,18 @@
 
 ## Component Variables
 
+### ActionResult
+
+• `Const` **ActionResult**: *React.FC*<Props\>
+
+Display block with success result or error message.
+
+To use this component, you need to wrap your component tree in a ```ResultContext``` from @use-ui/hooks.
+
+Defined in: [ActionResult.tsx:12](https://github.com/vasyas/use-ui-bootstrap3/blob/b91a52b/src/ActionResult.tsx#L12)
+
+___
+
 ### FormGroup
 
 • `Const` **FormGroup**: *React.FunctionComponent*<[*FormGroupProps*](interfaces/formgroupprops.md)\>
@@ -34,25 +46,9 @@ An input row, optionally containing a label and having error feedback text.
 
 Input is specified in children.
 
-Defined in: [FormGroup.tsx:20](https://github.com/vasyas/use-ui-bootstrap3/blob/295d451/src/FormGroup.tsx#L20)
+Defined in: [FormGroup.tsx:20](https://github.com/vasyas/use-ui-bootstrap3/blob/b91a52b/src/FormGroup.tsx#L20)
 
 ## Functions
-
-### ActionResult
-
-▸ `Const`**ActionResult**(`__namedParameters`: *Object*): *Element*
-
-#### Parameters:
-
-| Name | Type |
-| :------ | :------ |
-| `__namedParameters` | *Object* |
-
-**Returns:** *Element*
-
-Defined in: [ActionResult.tsx:5](https://github.com/vasyas/use-ui-bootstrap3/blob/295d451/src/ActionResult.tsx#L5)
-
-___
 
 ### CheckBox
 
@@ -66,7 +62,7 @@ ___
 
 **Returns:** *Element*
 
-Defined in: [CheckBox.tsx:15](https://github.com/vasyas/use-ui-bootstrap3/blob/295d451/src/CheckBox.tsx#L15)
+Defined in: [CheckBox.tsx:15](https://github.com/vasyas/use-ui-bootstrap3/blob/b91a52b/src/CheckBox.tsx#L15)
 
 ___
 
@@ -88,7 +84,7 @@ ___
 
 **Returns:** *Element*
 
-Defined in: [inlineEdit/InlineEdit.tsx:33](https://github.com/vasyas/use-ui-bootstrap3/blob/295d451/src/inlineEdit/InlineEdit.tsx#L33)
+Defined in: [inlineEdit/InlineEdit.tsx:33](https://github.com/vasyas/use-ui-bootstrap3/blob/b91a52b/src/inlineEdit/InlineEdit.tsx#L33)
 
 ___
 
@@ -104,7 +100,7 @@ ___
 
 **Returns:** *Element*
 
-Defined in: [Input.tsx:18](https://github.com/vasyas/use-ui-bootstrap3/blob/295d451/src/Input.tsx#L18)
+Defined in: [Input.tsx:18](https://github.com/vasyas/use-ui-bootstrap3/blob/b91a52b/src/Input.tsx#L18)
 
 ___
 
@@ -128,7 +124,7 @@ ___
 
 **Returns:** *Element*
 
-Defined in: [Select.tsx:43](https://github.com/vasyas/use-ui-bootstrap3/blob/295d451/src/Select.tsx#L43)
+Defined in: [Select.tsx:43](https://github.com/vasyas/use-ui-bootstrap3/blob/b91a52b/src/Select.tsx#L43)
 
 ___
 
@@ -144,7 +140,7 @@ ___
 
 **Returns:** *Element*
 
-Defined in: [Static.tsx:11](https://github.com/vasyas/use-ui-bootstrap3/blob/295d451/src/Static.tsx#L11)
+Defined in: [Static.tsx:11](https://github.com/vasyas/use-ui-bootstrap3/blob/b91a52b/src/Static.tsx#L11)
 
 ___
 
@@ -160,7 +156,7 @@ ___
 
 **Returns:** *Element*
 
-Defined in: [TextArea.tsx:19](https://github.com/vasyas/use-ui-bootstrap3/blob/295d451/src/TextArea.tsx#L19)
+Defined in: [TextArea.tsx:19](https://github.com/vasyas/use-ui-bootstrap3/blob/b91a52b/src/TextArea.tsx#L19)
 
 ___
 
@@ -178,7 +174,7 @@ ___
 
 **Returns:** React.ReactFragment
 
-Defined in: [utils.tsx:3](https://github.com/vasyas/use-ui-bootstrap3/blob/295d451/src/utils.tsx#L3)
+Defined in: [utils.tsx:3](https://github.com/vasyas/use-ui-bootstrap3/blob/b91a52b/src/utils.tsx#L3)
 
 ___
 
@@ -194,4 +190,4 @@ ___
 
 **Returns:** *void*
 
-Defined in: [FormGroup.tsx:46](https://github.com/vasyas/use-ui-bootstrap3/blob/295d451/src/FormGroup.tsx#L46)
+Defined in: [FormGroup.tsx:46](https://github.com/vasyas/use-ui-bootstrap3/blob/b91a52b/src/FormGroup.tsx#L46)
