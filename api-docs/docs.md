@@ -43,7 +43,7 @@ prop | type | default | required | description
 **autoFocus** | `boolean` |  | :x: | 
 **className** | `string` |  | :x: | 
 **disabled** | `boolean` |  | :x: | 
-**field** | `Field` |  | :white_check_mark: | 
+**field** | `Field` |  | :white_check_mark: | Reference to [@use-ui/hooks form field](https://github.com/vasyas/use-ui-hooks/blob/master/api-docs/README.md#useform)
 **id** | `string` |  | :x: | 
 **inputType** | `string` | `text` | :x: | 
 **integer** | `boolean` |  | :x: | 

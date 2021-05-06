@@ -59,6 +59,7 @@ export const Input = ({
 }
 
 interface Props extends Partial<Constraint>, FormGroupProps {
+  /** Reference to [@use-ui/hooks form field](https://github.com/vasyas/use-ui-hooks/blob/master/api-docs/README.md#useform) */
   field: Field
   type?: FieldTypeName
   autoFocus?: boolean
