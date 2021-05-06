@@ -1,16 +1,33 @@
 const fs = require("fs")
-
 const docgen = require("react-docgen-typescript")
-const {markdownRender} = require("react-docgen-typescript-markdown-render")
+const ReactDocGenMarkdownRenderer = require("react-docgen-markdown-renderer")
 
 const options = {
   savePropValueAsString: true,
 }
 
-const docs = docgen.parse("./src/ActionResult.tsx", options)
+const docs = docgen
+  .parse("./src/index.ts", options)
+  .filter((d) => d.displayName[0].toUpperCase() == d.displayName[0])
 
-console.dir(docs, {depth: 100})
+const renderer = new ReactDocGenMarkdownRenderer(/* constructor options object */)
 
-const result = markdownRender(docs)
+let result = `
+Component API
+
+## Components
+`
+
+for (const component of docs) {
+  result += `- [\\<${component.displayName}/\\>](docs.md#${component.displayName.toLowerCase()})\n`
+}
+
+result += "\n"
+
+for (const component of docs) {
+  const componentDoc = renderer.render("./src", component, [])
+  result += componentDoc
+  result += "&nbsp;\n&nbsp;\n"
+}
 
 fs.writeFileSync("api-docs/docs.md", result)
