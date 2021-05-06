@@ -1,6 +1,7 @@
 const fs = require("fs")
 const docgen = require("react-docgen-typescript")
 const ReactDocGenMarkdownRenderer = require("react-docgen-markdown-renderer")
+const {markdownRender} = require("react-docgen-typescript-markdown-render")
 
 const options = {
   savePropValueAsString: true,
@@ -25,7 +26,8 @@ for (const component of docs) {
 result += "\n"
 
 for (const component of docs) {
-  const componentDoc = renderer.render("./src", component, [])
+  // const componentDoc = renderer.render("./src", component, [])
+  const componentDoc = markdownRender([component])
   result += componentDoc
   result += "&nbsp;\n&nbsp;\n"
 }
