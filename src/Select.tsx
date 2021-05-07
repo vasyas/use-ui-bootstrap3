@@ -4,7 +4,7 @@ import AsyncSelect from "react-select/async"
 import {components} from "react-select"
 import {highlight} from "./utils"
 import {FormGroup, FormGroupProps} from "./FormGroup"
-import {Constraint, Field} from "@use-ui/hooks"
+import {Constraint, Field, FieldTypeName} from "@use-ui/hooks"
 import {RemoteTopic} from "@push-rpc/core"
 
 export type Option = {
@@ -21,6 +21,7 @@ interface Props<TopicData, TopicParams, MappedOption extends Option = Option>
   extends Partial<Constraint>,
     FormGroupProps {
   field: Field
+  type?: FieldTypeName
 
   topic?: RemoteTopic<TopicData[], TopicParams>
   params?: TopicParams
@@ -42,6 +43,7 @@ interface Props<TopicData, TopicParams, MappedOption extends Option = Option>
 
 export function Select<TopicData, TopicParams, MappedOption extends Option = Option>({
   field,
+  type,
 
   topic,
   params,
@@ -153,7 +155,7 @@ export function Select<TopicData, TopicParams, MappedOption extends Option = Opt
   }
 
   field.setFieldElement({
-    type: multi ? "stringList" : "string",
+    type: type || (multi ? "stringList" : "string"),
     constraint: other,
     focus: () => ref.current && ref.current.focus(),
     blur: () => ref.current.blur && ref.current.blur(),
