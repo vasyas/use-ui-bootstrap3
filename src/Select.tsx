@@ -27,7 +27,7 @@ interface Props<TopicData, TopicParams, MappedOption extends Option = Option>
   params?: TopicParams
   map?: (d: TopicData) => MappedOption
 
-  options?: MappedOption[] | Record<string, string>
+  options?: MappedOption[] | Record<string, string> | TopicData[]
 
   onSelect?(oo: MappedOption[]): void
 
