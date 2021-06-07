@@ -18,7 +18,8 @@
   },
   "peerDependencies": {
     "@push-rpc/core": "^1.0.0",
-    "@use-ui/hooks": "^1.0.0"
+    "@use-ui/hooks": "^1.0.0",
+    "react": "*"
   },
   "devDependencies": {
     "@push-rpc/core": "^1.2.9",
