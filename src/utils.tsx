@@ -40,11 +40,26 @@ export function highlight(s: string, term: string, exact = false): React.ReactFr
 export function getChildrenText(children) {
   let label = ""
 
-  React.Children.map(children, child => {
+  React.Children.map(children, (child) => {
     if (typeof child == "string") {
       label += child
     }
   })
 
   return label
+}
+
+export function equalExcept<T>(left: T, right: T, ...exclude: Array<keyof T>) {
+  const excludeSet = new Set(exclude)
+  const leftKeys = Object.keys(left)
+  const rightKeys = Object.keys(right)
+
+  if (leftKeys.length != rightKeys.length) return false
+
+  for (const key of leftKeys) {
+    if (excludeSet.has(key as keyof T)) continue
+    if (left[key] != right[key]) return false
+  }
+
+  return true
 }

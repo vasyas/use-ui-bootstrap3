@@ -5,11 +5,12 @@ import {FormGroupProps} from "../FormGroup"
 import cx from "classnames"
 import {FieldType} from "@use-ui/hooks/dist/fieldTypes"
 import {enValidateMessages, message} from "@use-ui/hooks/dist/validate"
+import {equalExcept} from "../utils"
 
 type Props<V> = FormGroupProps &
   RenderProp & {
     value: V
-    save(value: V): Promise<void>
+    save(value: V): Promise<unknown>
     label?: any
     cancel?: boolean
     style?: CSSProperties
@@ -29,8 +30,11 @@ interface FieldComponentProps {
   disabled?: boolean
 }
 
-// TODO move non-presentation to @use-ui/hooks
-export function InlineEdit<V>(p: Props<V>) {
+export const InlineEdit = React.memo(InlineEditRaw, (prev, next) => {
+  return equalExcept(prev, next, "save", "component" as any, "render" as any)
+}) as typeof InlineEditRaw
+
+function InlineEditRaw<V>(p: Props<V>) {
   const props: Props<V> = {
     style: {},
     ...p,
@@ -116,11 +120,11 @@ export function InlineEdit<V>(p: Props<V>) {
       return (
         <>
           {error ? (
-            <a className="error-saving" href="#" onClick={e => e.preventDefault()} tabIndex={-1}>
+            <a className="error-saving" href="#" onClick={(e) => e.preventDefault()} tabIndex={-1}>
               <i className="fa fa-warning" />
             </a>
           ) : (
-            <a className="save" href="#" onClick={e => e.preventDefault()} tabIndex={-1}>
+            <a className="save" href="#" onClick={(e) => e.preventDefault()} tabIndex={-1}>
               <i className="fa fa-check" />
             </a>
           )}
@@ -166,11 +170,11 @@ export function InlineEdit<V>(p: Props<V>) {
   }
 
   const field: Field = {
-    setFieldElement: fe => {
+    setFieldElement: (fe) => {
       return (fieldElement.current = fe)
     },
     getValue: () => edited,
-    setValue: s => {
+    setValue: (s) => {
       setEdited(s)
       if (error) updateValidationError()
     },

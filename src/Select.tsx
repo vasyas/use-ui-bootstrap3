@@ -2,7 +2,7 @@ import * as React from "react"
 import {useEffect, useRef, useState} from "react"
 import AsyncSelect from "react-select/async"
 import {components} from "react-select"
-import {highlight} from "./utils"
+import {equalExcept, highlight} from "./utils"
 import {FormGroup, FormGroupProps} from "./FormGroup"
 import {Constraint, Field, FieldTypeName} from "@use-ui/hooks"
 import {RemoteTopic} from "@push-rpc/core"
@@ -41,7 +41,11 @@ interface Props<TopicData, TopicParams, MappedOption extends Option = Option>
   id?: string
 }
 
-export function Select<TopicData, TopicParams, MappedOption extends Option = Option>({
+export const Select = React.memo(SelectRaw, (prev, next) => {
+  return equalExcept(prev, next, "field", "map", "onSelect")
+}) as typeof SelectRaw
+
+function SelectRaw<TopicData, TopicParams, MappedOption extends Option = Option>({
   field,
   type,
 
