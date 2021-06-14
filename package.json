@@ -11,6 +11,7 @@
   },
   "license": "MIT",
   "repository": "https://github.com/vasyas/use-ui-bootstrap3.git",
+  "homepage": "https://github.com/vasyas/use-ui-bootstrap3",
   "author": "vasyas <vasyl@stashuk.com>",
   "dependencies": {
     "classnames": "^2.3.1",
