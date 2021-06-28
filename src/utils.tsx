@@ -8,7 +8,7 @@ export function highlight(s: string, term: string, exact = false): React.ReactFr
       return s == term ? <span className="hlt">s</span> : s
     }
 
-    const parts = s.split(new RegExp(term, "i"))
+    const parts = s.split(new RegExp(escapeRegex(term), "i"))
     if (parts.length == 1) return parts[0]
 
     const r = []
@@ -35,6 +35,10 @@ export function highlight(s: string, term: string, exact = false): React.ReactFr
   }
 
   return s
+}
+
+function escapeRegex(string) {
+  return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&")
 }
 
 export function getChildrenText(children) {
