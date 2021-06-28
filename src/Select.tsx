@@ -42,7 +42,11 @@ interface Props<TopicData, TopicParams, MappedOption extends Option = Option>
 }
 
 export const Select = React.memo(SelectRaw, (prev, next) => {
-  return equalExcept(prev, next, "field", "map", "onSelect")
+  return (
+    equalExcept(prev, next, "field", "map", "onSelect") &&
+    prev.field.getValue() == next.field.getValue() &&
+    prev.field.getError() == next.field.getError()
+  )
 }) as typeof SelectRaw
 
 function SelectRaw<TopicData, TopicParams, MappedOption extends Option = Option>({
