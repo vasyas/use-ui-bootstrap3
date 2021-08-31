@@ -34,7 +34,7 @@ export const InlineEdit = React.memo(InlineEditRaw, (prev, next) => {
   return equalExcept(prev, next, "save", "component" as any, "render" as any)
 }) as typeof InlineEditRaw
 
-function InlineEditRaw<V>(p: Props<V>) {
+export function InlineEditRaw<V>(p: Props<V>) {
   const props: Props<V> = {
     style: {},
     ...p,

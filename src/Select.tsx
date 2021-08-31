@@ -49,7 +49,7 @@ export const Select = React.memo(SelectRaw, (prev, next) => {
   )
 }) as typeof SelectRaw
 
-function SelectRaw<TopicData, TopicParams, MappedOption extends Option = Option>({
+export function SelectRaw<TopicData, TopicParams, MappedOption extends Option = Option>({
   field,
   type,
 
