@@ -95,14 +95,14 @@ export function SelectRaw<TopicData, TopicParams, MappedOption extends Option = 
       : [field.getValue()]
     : []
 
-  async function loadOptions(search, values) {
+  async function loadOptions(search) {
     let options = optionsArray
 
     if (!options) {
       setLoading(true)
 
       try {
-        const items = await topic.get({...params, search, values})
+        const items = await topic.get({...params, search, values: selectedValues})
         options = items.map(map)
       } finally {
         setLoading(false)
@@ -137,7 +137,7 @@ export function SelectRaw<TopicData, TopicParams, MappedOption extends Option = 
   useEffect(() => {
     if (!initialRender.current) {
       field.setValue("")
-      loadOptions(null, selectedValues).then(setDefaultOptions)
+      loadOptions(null).then(setDefaultOptions)
     } else {
       setDefaultOptions(true)
 
