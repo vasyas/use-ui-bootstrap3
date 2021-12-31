@@ -87,15 +87,11 @@ export function SelectRaw<TopicData, TopicParams, MappedOption extends Option = 
   const [selected, setSelected] = useState<MappedOption[]>([])
   const [inputValue, setInputValue] = useState<string>("")
 
-  const [defaultOptions, setDefaultOptions] = useState<boolean | MappedOption[]>()
-
   const selectedValues = field.getValue()
     ? multi
       ? field.getValue().split(",")
       : [field.getValue()]
     : []
-
-  console.log("Select", {selected, cachedOptions, inputValue, defaultOptions})
 
   async function loadOptions(search) {
     let options = optionsArray
@@ -122,8 +118,6 @@ export function SelectRaw<TopicData, TopicParams, MappedOption extends Option = 
 
   // set selected option
   useEffect(() => {
-    console.log("Selected effect", cachedOptions, field.getValue())
-
     const value = field.getValue()
     const selectedValues = value ? (multi ? value.split(",") : [value]) : []
 
@@ -137,18 +131,17 @@ export function SelectRaw<TopicData, TopicParams, MappedOption extends Option = 
 
   // on topic param change:
   // 1. reset value
-  // 2. re-load options, update defaultOptions & cached
+  // 2. re-load options, updating cached options
   useEffect(() => {
     if (!initialRender.current) {
       // 2nd render
       field.setValue("")
-      loadOptions(null).then(setDefaultOptions)
     } else {
-      // 1st render
-      setDefaultOptions(true)
-
       initialRender.current = false
     }
+
+    // noinspection JSIgnoredPromiseFromCall
+    loadOptions("")
   }, [JSON.stringify(params)])
 
   function onChange(val) {
@@ -180,7 +173,7 @@ export function SelectRaw<TopicData, TopicParams, MappedOption extends Option = 
     <FormGroup label={label} invalidFeedback={field.getError()} style={style}>
       <AsyncSelect
         className={`select ${className || ""}`.trim()}
-        key={JSON.stringify(options) + "-" + JSON.stringify(defaultOptions)}
+        key={JSON.stringify(options)}
         ref={ref}
         styles={{
           ...styles,
@@ -194,7 +187,7 @@ export function SelectRaw<TopicData, TopicParams, MappedOption extends Option = 
         menuShouldBlockScroll={true}
         classNamePrefix="select"
         menuPlacement="auto"
-        defaultOptions={defaultOptions}
+        defaultOptions={cachedOptions}
         components={{
           Option: (props) => <HighlightingOption {...props} inputValue={inputValue} />,
         }}
