@@ -95,6 +95,8 @@ export function SelectRaw<TopicData, TopicParams, MappedOption extends Option = 
       : [field.getValue()]
     : []
 
+  console.log("Select", {selected, cachedOptions, inputValue, defaultOptions})
+
   async function loadOptions(search) {
     let options = optionsArray
 
@@ -102,7 +104,7 @@ export function SelectRaw<TopicData, TopicParams, MappedOption extends Option = 
       setLoading(true)
 
       try {
-        const items = await topic.get({...params, search, values: selectedValues})
+        const items = await topic.get({...params, search, values: search ? null : selectedValues})
         options = items.map(map)
       } finally {
         setLoading(false)
@@ -120,6 +122,8 @@ export function SelectRaw<TopicData, TopicParams, MappedOption extends Option = 
 
   // set selected option
   useEffect(() => {
+    console.log("Selected effect", cachedOptions, field.getValue())
+
     const value = field.getValue()
     const selectedValues = value ? (multi ? value.split(",") : [value]) : []
 
@@ -136,9 +140,11 @@ export function SelectRaw<TopicData, TopicParams, MappedOption extends Option = 
   // 2. re-load options, update defaultOptions & cached
   useEffect(() => {
     if (!initialRender.current) {
+      // 2nd render
       field.setValue("")
       loadOptions(null).then(setDefaultOptions)
     } else {
+      // 1st render
       setDefaultOptions(true)
 
       initialRender.current = false
