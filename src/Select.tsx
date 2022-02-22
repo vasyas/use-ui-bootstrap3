@@ -185,6 +185,7 @@ export function SelectRaw<TopicData, TopicParams, MappedOption extends Option = 
         }}
         menuPortalTarget={document.getElementById("popupTarget")}
         menuShouldBlockScroll={true}
+        captureMenuScroll={false}
         classNamePrefix="select"
         menuPlacement="auto"
         defaultOptions={cachedOptions}
