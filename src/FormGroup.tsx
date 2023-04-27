@@ -8,6 +8,8 @@ export interface FormGroupProps {
   invalidFeedback?: any
   /** Additional style that should be passed to the top div */
   style?: CSSProperties
+  /** @param  The id of the input element */
+  htmlFor?: string
 }
 
 /**
@@ -20,6 +22,7 @@ export const FormGroup: React.FunctionComponent<FormGroupProps> = ({
   invalidFeedback = null,
   style = undefined,
   children,
+  htmlFor = undefined,
 }) => {
   if (label == null) {
     return <>{children}</>
@@ -27,7 +30,11 @@ export const FormGroup: React.FunctionComponent<FormGroupProps> = ({
 
   return (
     <div className="form-group" style={style}>
-      {label && <label className={classNames.label}>{label}</label>}
+      {label && (
+        <label className={classNames.label} htmlFor={htmlFor}>
+          {label}
+        </label>
+      )}
       <div className={classNames.field}>
         {children}
         {invalidFeedback && <div className="invalid-feedback form-text">{invalidFeedback}</div>}
