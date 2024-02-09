@@ -5,7 +5,8 @@ import {components} from "react-select"
 import {equalExcept, highlight} from "./utils"
 import {FormGroup, FormGroupProps} from "./FormGroup"
 import {Constraint, Field, FieldTypeName} from "@use-ui/hooks"
-import {RemoteTopic} from "@push-rpc/core"
+
+type RemoteTopic<TopicData, TopicParams> = (param: TopicParams) => Promise<TopicData>
 
 export type Option = {
   value: string
@@ -100,7 +101,7 @@ export function SelectRaw<TopicData, TopicParams, MappedOption extends Option = 
       setLoading(true)
 
       try {
-        const items = await topic.get({...params, search, values: search ? null : selectedValues})
+        const items = await topic({...params, search, values: search ? null : selectedValues})
         options = items.map(map)
       } finally {
         setLoading(false)
